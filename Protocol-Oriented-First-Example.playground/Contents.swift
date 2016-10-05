@@ -45,6 +45,7 @@ extension Bird where Self: Flyable{
 
 extension Bird where Self: Runable{
     var canRun:Bool{return true}
+    var test:Double{return velocity*90}
 }
 
 
@@ -58,4 +59,5 @@ var p = Penguin(name: "Little Penguin")
 p.canFly
 p.name
 p.canRun
+p.test
 
