@@ -7,6 +7,7 @@ protocol Bird{
     var name:String{get}
     var canFly:Bool{get}
     var weight:Double{get}
+    var type:String{get}
 }
 
 protocol Flyable{
@@ -22,6 +23,7 @@ struct FlappyBird:Bird,Flyable{
     var flappyFrequency:Double
     var weight: Double
     var wingLength: Double
+    var type: String
 }
 
 struct Penguin:Bird,Runable{
@@ -29,6 +31,7 @@ struct Penguin:Bird,Runable{
     var canFly:Bool{return false}
     var weight: Double
     var legLength:Double
+    var type: String
 }
 
 struct SwiftBird: Bird, Flyable {
@@ -36,16 +39,15 @@ struct SwiftBird: Bird, Flyable {
     let version: Double
     var weight: Double
     var wingLength:Double
+    var type: String
 }
 
 struct BrunoBird:Bird,Flyable,Runable{
-    internal var weight: Double
-
-    internal var name: String
-
-    internal var legLength: Double
-
-    internal var wingLength: Double
+    var weight: Double
+    var name: String
+    var legLength: Double
+    var wingLength: Double
+    var type: String
 }
 
 extension Bird where Self: Flyable{
@@ -55,13 +57,32 @@ extension Bird where Self: Flyable{
 }
 
 extension Bird where Self:Flyable, Self: Runable{
-    var boss:String{return "Boss Dad"}
+    var boss:String{return "\(name) super"}
 }
 
 extension Bird where Self: Runable{
     //Runable birds can run
     var canRun:Bool{return true}
     var landSpeed:Double {return legLength*3.32}        // It`s not real =D
+}
+
+//Using enum
+enum BirdType: Bird{
+    case Brazillian
+    case African
+
+    var name: String{return "LALA"}
+    var canFly: Bool{return false}
+    var weight: Double{return 99.99}
+    
+    var type: String{
+        switch self {
+        case .Brazillian:
+            return "HUE"
+        case .African:
+            return "HAH"
+        }
+    }
 }
 
 
