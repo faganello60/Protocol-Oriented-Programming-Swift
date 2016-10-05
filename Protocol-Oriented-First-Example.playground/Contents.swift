@@ -6,58 +6,66 @@ import UIKit
 protocol Bird{
     var name:String{get}
     var canFly:Bool{get}
+    var weight:Double{get}
 }
 
 protocol Flyable{
-    var speed:Double{get}
+    var wingLength:Double{get}
 }
 
 protocol Runable{
-    var velocity:Double{get}
+    var legLength:Double{get}
 }
 
 struct FlappyBird:Bird,Flyable{
     var name: String
     var flappyFrequency:Double
-    var speed: Double{
-        return 3 * flappyFrequency
-    }
+    var weight: Double
+    var wingLength: Double
 }
 
 struct Penguin:Bird,Runable{
     var name: String
     var canFly:Bool{return false}
-    var velocity: Double{
-       return 30.4
-    }
+    var weight: Double
+    var legLength:Double
 }
 
 struct SwiftBird: Bird, Flyable {
     var name: String { return "Swift \(version)" }
     let version: Double
-    var speed: Double { return 2000.0 }
+    var weight: Double
+    var wingLength:Double
+}
+
+struct BrunoBird:Bird,Flyable,Runable{
+    internal var weight: Double
+
+    internal var name: String
+
+    internal var legLength: Double
+
+    internal var wingLength: Double
 }
 
 extension Bird where Self: Flyable{
     // Flyable birds can fly!
     var canFly: Bool {return true}
+    var airSpeed: Double {return wingLength*(weight-3)} // It`s not real =D
+}
+
+extension Bird where Self:Flyable, Self: Runable{
+    var boss:String{return "Boss Dad"}
 }
 
 extension Bird where Self: Runable{
+    //Runable birds can run
     var canRun:Bool{return true}
-    var test:Double{return velocity*90}
+    var landSpeed:Double {return legLength*3.32}        // It`s not real =D
 }
 
 
-var fb = FlappyBird(name: "Bruno", flappyFrequency: 60)
-fb.canFly
 
-var sb = SwiftBird(version: 90)
-sb.canFly
 
-var p = Penguin(name: "Little Penguin")
-p.canFly
-p.name
-p.canRun
-p.test
+
 
