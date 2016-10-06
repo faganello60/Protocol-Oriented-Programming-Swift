@@ -70,11 +70,9 @@ extension Bird where Self: Runable{
 enum BirdType: Bird{
     case Brazillian
     case African
-
-    var name: String{return "LALA"}
-    var canFly: Bool{return false}
-    var weight: Double{return 99.99}
-    
+    var name: String{return "LALA"} // We can not set after
+    var canFly: Bool{return false}  // We can not set after
+    var weight: Double{return 99.99}// We can not set after
     var type: String{
         switch self {
         case .Brazillian:
@@ -84,6 +82,12 @@ enum BirdType: Bird{
         }
     }
 }
+
+var x = [Bird]()
+let p = Penguin(name: "", weight: 312, legLength: 213, type: "")
+x.append(p)
+
+
 
 
 
